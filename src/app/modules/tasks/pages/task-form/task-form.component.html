@@ -1,0 +1,98 @@
+<h3 mat-dialog-title class="gray-color">Task form</h3>
+<div class="add-lessons-form" [formGroup]="formTask" mat-dialog-content>
+  <mat-form-field style="width: 100%;" cdkFocusInitial>
+    <mat-label>Task Name</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="formTask.get('name')?.touched && formTask.get('name')?.errors">
+      <ng-container *ngIf="formTask.get('name')?.errors?.['required']">The task name is required</ng-container>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Deadline</mat-label>
+    <input matInput readonly formControlName="deadLine" (click)="picker.open()" [matDatepicker]="picker"/>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="formTask.get('deadLine')?.touched && formTask.get('deadLine')?.errors">
+      <ng-container *ngIf="formTask.get('deadLine')?.errors?.['required']">The deadline is required</ng-container>
+    </mat-error>
+  </mat-form-field>
+  <div class="associated-people-box">
+    <h4>Associated people</h4>
+    <ng-container formArrayName="people">
+      <ng-container *ngFor="
+          let personForm of getFormControlByName(formTask, 'people').controls;
+          let personIndex = index
+        ">
+        <div [formGroup]="personForm" class="person-box">
+          <div class="person-number-box">
+            {{personIndex+1}}
+          </div>
+          <div class="info-box">
+            <div class="basic-info-box">
+              <mat-form-field>
+                <mat-label>Person Full Name:</mat-label>
+                <input matInput formControlName="name" />
+                <mat-error *ngIf="personForm.get('name')?.touched && personForm.get('name')?.errors">
+                  <ng-container *ngIf="personForm.get('name')?.errors?.['required']">The name is required</ng-container>
+                  <ng-container *ngIf="personForm.get('name')?.errors?.['unique']">The name should be unique</ng-container>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Person Age:</mat-label>
+                <input matInput formControlName="age" />
+                <mat-error *ngIf="personForm.get('age')?.touched && personForm.get('age')?.errors">
+                  <ng-container *ngIf="personForm.get('age')?.errors?.['required']">The age is required</ng-container>
+                  <ng-container *ngIf="personForm.get('age')?.errors?.['min']">The age should be greather than 17</ng-container>
+                  <ng-container *ngIf="personForm.get('age')?.errors?.['numeric']">The age should be numeric</ng-container>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="person-skills-box">
+              <h5>Person skills</h5>
+              <div class="skill-list-box">
+                <ng-container formArrayName="skills">
+                  <ng-container *ngFor="
+                    let skillForm of getFormControlByName(personForm, 'skills')
+                      .controls;
+                    let skillIndex = index
+                  ">
+                    <div [formGroup]="skillForm">
+                      <mat-form-field>
+                        <mat-label>Skill Name:</mat-label>
+                        <input matInput formControlName="name" />
+                        <button matSuffix *ngIf="skillIndex!==0" mat-icon-button
+                          (click)="deleteFormControl(personForm, 'skills', skillIndex)">
+                          <mat-icon>clear</mat-icon>
+                        </button>
+                        <mat-error *ngIf="skillForm.get('name')?.touched && skillForm.get('name')?.errors">
+                          <ng-container *ngIf="skillForm.get('name')?.errors?.['required']">The skill is required</ng-container>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+              <button mat-raised-button class="add-btn" (click)="
+              addFormControl(personForm, 'skills', skillFormControlTemplate())
+            ">
+                <mat-icon>add</mat-icon> Add Skill
+              </button>
+            </div>
+          </div>
+          <div class="person-actions-box">
+            <button mat-icon-button (click)="deleteFormControl(formTask, 'people', personIndex)">
+              <mat-icon>remove_circle_outline</mat-icon>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <button class="add-btn" mat-raised-button (click)="addFormControl(formTask, 'people', personFormControlTemplate())">
+      <mat-icon>add</mat-icon> Add person
+    </button>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!formTask.valid" (click)="saveTask()">Save</button>
+</div>

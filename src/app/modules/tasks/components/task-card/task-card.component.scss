@@ -1,0 +1,28 @@
+.task-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding-right: 15px;
+}
+
+.task-expansion-panel-body {
+
+    &.task-expansion-panel-body {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 16px;
+    }
+}
+
+.task-name{
+    flex-grow: 1;
+}
+
+.done-status{
+    background-color: #006644;
+    color: #7EE2B8;
+    --mdc-chip-disabled-label-text-color: #7EE2B8;
+    opacity: .8;
+}

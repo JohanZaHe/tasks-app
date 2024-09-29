@@ -1,0 +1,16 @@
+.filters-box,
+.title-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.title-box {
+    justify-content: space-between;
+}
+
+.filters-box {
+    margin-bottom: 20px;
+}

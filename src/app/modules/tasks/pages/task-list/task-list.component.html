@@ -1,0 +1,28 @@
+<div class="title-box">
+  <h3 class="gray-color">Task List</h3>
+  <button mat-button color="primary" (click)="openTaskForm()">
+    <mat-icon>add</mat-icon> Add Task
+  </button>
+</div>
+<div class="filters-box">
+  <strong class="gray-color">Filters</strong>
+  <mat-chip-listbox aria-label="Filter task selection" (change)="filterChange($event)">
+    <mat-chip-option *ngFor="let filter of taskStatusFilters" [selected]="filterSelected === filter.id"
+      [color]="filter.color" [value]="filter.id">
+      {{ filter.name }}
+    </mat-chip-option>
+  </mat-chip-listbox>
+</div>
+
+<ng-template #taskList let-tasks="tasks" let-taskTrackBy="taskTrackBy">
+  <app-task-card [task]="task" *ngFor="let task of tasks; taskTrackBy"></app-task-card>
+  <ng-container *ngIf="tasks.length===0">
+    <span class="gray-color" style="padding: 10px;">
+      No registers availables
+    </span> </ng-container>
+</ng-template>
+
+
+
+<ng-container
+  *ngTemplateOutlet="taskList; context: {tasks: $tasks | async | statusFilter:filterSelected, taskTrackBy: taskTrackBy}"></ng-container>

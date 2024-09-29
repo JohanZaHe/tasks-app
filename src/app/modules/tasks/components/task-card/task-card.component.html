@@ -1,0 +1,63 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <div class="task-item">
+        <div (click)="$event.stopPropagation()">
+          <mat-checkbox
+            [checked]="task.status === 'done'"
+            (change)="changeTaskStatus($event)"
+            color="primary"
+          ></mat-checkbox>
+        </div>
+        <div class="gray-color task-name">{{ task.name }}</div>
+        <mat-chip-row
+          disabled
+          class="gray-color"
+          [class.done-status]="task.status === 'done'"
+          >{{ task.status | titlecase }}</mat-chip-row
+        >
+        <div>
+          <ng-container *ngFor="let person of task.people">
+            <img
+              src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
+              [matTooltip]="person.name"
+              width="40px"
+              height="auto"
+              alt=""
+            />
+          </ng-container>
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+    <div class="task-expansion-panel-body">
+      <div class="gray-color"><strong>Task Name:</strong> {{ task.name }}</div>
+      <div class="gray-color">
+        <strong>Deadline:</strong> {{ task.deadLine | date }}
+      </div>
+      <div class="gray-color">
+        <strong>Status:</strong> {{ task.status | titlecase }}
+      </div>
+      <div>
+        <h4 class="gray-color">Associated people</h4>
+        <ol>
+          <li *ngFor="let person of task.people">
+            <div>
+              <div class="gray-color">
+                <strong>Name:</strong> {{ person.name }}
+              </div>
+              <div class="gray-color">
+                <strong>Age:</strong> {{ person.age }}
+              </div>
+              <h4 class="not-mb gray-color">Skills</h4>
+              <ul>
+                <li class="gray-color" *ngFor="let skill of person.skills">
+                  {{ skill.name }}
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,72 @@
+.associated-people-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.person-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.info-box {
+    max-width: calc(100% - 60px);
+    border: solid 1px #ccc;
+    padding: 10px;
+}
+
+.person-skills-box {
+    margin-left: 10px;
+    flex-direction: column;
+    display: flex;
+}
+
+.skill-list-box {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+}
+
+.basic-info-box {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+}
+
+.add-btn {
+    width: fit-content;
+}
+
+.person-divider {
+    margin-bottom: 20px;
+}
+
+.person-number-box {
+    background-color: rgb(162, 162, 162);
+    width: 30px;
+    color: white;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.person-actions-box {
+    background-color: #e75d53;
+    width: 30px;
+    color: white;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+:host {
+    --mdc-dialog-subhead-color: #595959 !important;
+}

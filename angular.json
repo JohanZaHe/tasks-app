@@ -30,6 +30,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -62,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tasks:build:production"
+              "browserTarget": "tasks:build:production"
             },
             "development": {
-              "buildTarget": "tasks:build:development"
+              "browserTarget": "tasks:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "tasks:build"
+            "browserTarget": "tasks:build"
           }
         },
         "test": {
